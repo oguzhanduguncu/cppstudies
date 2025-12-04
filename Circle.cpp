@@ -5,7 +5,6 @@
 #include "Circle.h"
 
 #include <iostream>
-#include <__msvc_ostream.hpp>
 static constexpr double PI = 3.14159265358979323846;
 
 Circle::Circle(double r) :  radius(r) {

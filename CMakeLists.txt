@@ -9,4 +9,6 @@ add_executable(inheritencepolymorphism main.cpp
         Rectangle.cpp
         Rectangle.h
         ShapeFactory.cpp
-        ShapeFactory.h)
+        ShapeFactory.h
+        Triangular.cpp
+        Triangular.h)
