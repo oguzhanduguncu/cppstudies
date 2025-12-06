@@ -144,19 +144,19 @@ container insertion idiom**.
 ------------------------------------------------------------------------
 
 ### Performance comparision
- ---- push_back with temporary ----
-Ctor
-Move ctor
----- emplace_back with temporary ----
-Ctor
-Move ctor
----- push_back with args ----
-Ctor
-Move ctor
----- emplace_back with args ----
-Ctor
----- push_back with named object ----
-Copy Ctor
----- emplace_back with named object ----
-Copy Ctor
+ ---- push_back with temporary ---- \
+Ctor \
+Move ctor \
+---- emplace_back with temporary ---- \
+Ctor  \
+Move ctor   \
+---- push_back with args ----   \
+Ctor  \
+Move ctor   \
+---- emplace_back with args ----  \
+Ctor    \
+---- push_back with named object ---- \
+Copy Ctor   \
+---- emplace_back with named object ----   \
+Copy Ctor  \
 
