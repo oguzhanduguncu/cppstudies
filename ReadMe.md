@@ -141,3 +141,22 @@ container insertion idiom**.
   - Item 26 — Avoid overloading on universal references
   - Item 30 — Familiarize yourself with perfect forwarding failure cases
 
+------------------------------------------------------------------------
+
+### Performance comparision
+ ---- push_back with temporary ----
+Ctor
+Move ctor
+---- emplace_back with temporary ----
+Ctor
+Move ctor
+---- push_back with args ----
+Ctor
+Move ctor
+---- emplace_back with args ----
+Ctor
+---- push_back with named object ----
+Copy Ctor
+---- emplace_back with named object ----
+Copy Ctor
+
