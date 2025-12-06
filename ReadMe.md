@@ -131,3 +131,13 @@ intentional, efficient object construction.
 
 Used together, they form a **safe, expressive, and high-performance
 container insertion idiom**.
+
+------------------------------------------------------------------------
+
+### References
+- Scott Meyers, *Effective Modern C++*
+  - Item 41 — Consider using `emplace` instead of `insert`
+  - Item 25 — Use `std::move` on rvalue references, `std::forward` on universal references
+  - Item 26 — Avoid overloading on universal references
+  - Item 30 — Familiarize yourself with perfect forwarding failure cases
+
