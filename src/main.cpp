@@ -40,6 +40,7 @@ int main() {
     }
     std::cout << "\n";
 
+
     auto start = std::chrono::high_resolution_clock::now();
     for (int i  = 0; i < N; ++i) {
         threads.emplace_back(roomIdentifier, std::ref(rooms[i]));
