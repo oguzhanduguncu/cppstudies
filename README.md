@@ -32,29 +32,15 @@ Süre: 1.50059
 
 MESI State Tablosu:
 
-1. Base MESI State Table                         
-| State             | Anlam (kısa teknik açıklama)                                                                         |
-| ----------------- | ---------------------------------------------------------------------------------------------------- |
-| **M — Modified**  | Cache line sadece bu çekirdekte var, RAM’den farklı, yazılmış durumda. Başka çekirdekte kopyası yok. |
-| **E — Exclusive** | Cache line sadece bu çekirdekte var, RAM ile aynı, henüz yazılmamış.                                 |
-| **S — Shared**    | Birden fazla çekirdekte aynı anda bulunuyor, sadece okunabilir durumda.                              |
-| **I — Invalid**   | Cache line geçersiz; diğer çekirdekteki bir write yüzünden veya eviction ile silinmiş.               |
-2. AMD Opteron (MOESI) State Table
-| State             | Anlam                                                                                              |
-| ----------------- | -------------------------------------------------------------------------------------------------- |
-| **M — Modified**  | Veri sadece bu çekirdekte, RAM’den farklı; write-back gerektirir.                                  |
-| **O — Owned**     | Bu çekirdekte "dirty shared" kopya vardır; diğer çekirdeklere veri dağıtımını *bu çekirdek* yapar. |
-| **E — Exclusive** | Tek çekirdekte, temiz kopya, serbestçe yazılabilir.                                                |
-| **S — Shared**    | Temiz paylaşılmış kopya.                                                                           |
-| **I — Invalid**   | Geçersiz cache line.                                                                               |
-3. Intel i7 MESIF State Table
-| State             | Anlam                                                                                                       |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| **M — Modified**  | Çekirdek verinin sahibi ve tek geçerli yazılmış kopyadır.                                                   |
-| **E — Exclusive** | Temiz ve sadece bu çekirdekte; ilk yazma ile M’e geçer.                                                     |
-| **S — Shared**    | Temiz, birden fazla çekirdekte olabilir.                                                                    |
-| **I — Invalid**   | Geçersiz cache line.                                                                                        |
-| **F — Forward**   | Shared kopyalar arasında **tek bir çekirdek** “resmi kaynak” olur → diğerlerine veri iletimini hızlandırır. |
+| State             | MESI Anlamı                                                          | MOESI Anlamı (AMD)                                                                               | MESIF Anlamı (Intel)                                                            |
+| ----------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| **M — Modified**  | Cache line yalnızca bu çekirdekte, RAM’den farklı, yazılmış durumda. | Aynı şekilde tek “dirty” kopya; write-back gerekir.                                              | Tek geçerli “dirty” kopya; çekirdek veri sahibidir.                             |
+| **E — Exclusive** | Temiz ve yalnızca tek çekirdekte, henüz yazılmamış.                  | Temiz, tek çekirdekli kopya; yazmaya hazır.                                                      | Temiz, tek çekirdekte; ilk yazmada M durumuna geçer.                            |
+| **S — Shared**    | Temiz, birden fazla çekirdekte; sadece okuma.                        | Temiz paylaşılmış kopya.                                                                         | Temiz, paylaşılmış kopya (Forwarder **değil**).                                 |
+| **I — Invalid**   | Cache line geçersiz; başka çekirdeğin write'ı veya eviction sonrası. | Geçersiz cache line.                                                                             | Geçersiz cache line.                                                            |
+| **O — Owned**     | ❌ MESI’de yok                                                        | “Dirty shared” durum: diğer çekirdeklere veri servis eden çekirdek. RAM henüz güncellenmemiştir. | ❌ MESIF’te yok                                                                  |
+| **F — Forward**   | ❌ MESI’de yok                                                        | ❌ MOESI’de yok                                                                                   | Shared kopyalar arasında tek bir “forwarder” çekirdek diğerlerine veri dağıtır. |
+
 
 False Sharing – MESI State Ping-Pong Senaryosu
 ----------------------------------------------
