@@ -15,30 +15,46 @@
 Süre: 5.38799
 
 📌 Layout: padded structure
-index	address	line_id	offset_in_line
-0	0x55ec0ab63280	157b02ad8ca	0
-1	0x55ec0ab632c0	157b02ad8cb	0
-2	0x55ec0ab63300	157b02ad8cc	0
-3	0x55ec0ab63340	157b02ad8cd	0
-4	0x55ec0ab63380	157b02ad8ce	0
-5	0x55ec0ab633c0	157b02ad8cf	0
-6	0x55ec0ab63400	157b02ad8d0	0
-7	0x55ec0ab63440	157b02ad8d1	0
+| index | address        | line_id     | offset_in_line |
+| ----: | -------------- | ----------- | -------------- |
+|     0 | 0x55ec0ab63280 | 157b02ad8ca | 0              |
+|     1 | 0x55ec0ab632c0 | 157b02ad8cb | 0              |
+|     2 | 0x55ec0ab63300 | 157b02ad8cc | 0              |
+|     3 | 0x55ec0ab63340 | 157b02ad8cd | 0              |
+|     4 | 0x55ec0ab63380 | 157b02ad8ce | 0              |
+|     5 | 0x55ec0ab633c0 | 157b02ad8cf | 0              |
+|     6 | 0x55ec0ab63400 | 157b02ad8d0 | 0              |
+|     7 | 0x55ec0ab63440 | 157b02ad8d1 | 0              |
+
 
 Süre: 1.50059
 
 
-MESI State Tablosu:              
-                          
-| State | Anlam (kısaca kendin yaz) |    | State |        Anlam              |    | State|        Anlam          |     
-|-------|---------------------------|    |-------|---------------------------|    |------|-----------------------|
-| M     |        Modified           |    | M     |        Modified           |    |  M   |        Modified       |
-| E     |        Exclusive          |    | O     |        Owned              |    |  E   |        Exclusive      |
-| S     |        Shared             |    | E     |        Exclusive          |    |  S   |        Shared         |
-| I     |        Invalid            |    | S     |        Shared             |    |  I   |        Invalid        |
-                                         | I     |        Invalid            |    |  F   |        Forward        |
-1.Base State Table                       2. AMD Opteron processor family          3. Intel i7
+MESI State Tablosu:
 
+1. Base MESI State Table                         
+| State             | Anlam (kısa teknik açıklama)                                                                         |
+| ----------------- | ---------------------------------------------------------------------------------------------------- |
+| **M — Modified**  | Cache line sadece bu çekirdekte var, RAM’den farklı, yazılmış durumda. Başka çekirdekte kopyası yok. |
+| **E — Exclusive** | Cache line sadece bu çekirdekte var, RAM ile aynı, henüz yazılmamış.                                 |
+| **S — Shared**    | Birden fazla çekirdekte aynı anda bulunuyor, sadece okunabilir durumda.                              |
+| **I — Invalid**   | Cache line geçersiz; diğer çekirdekteki bir write yüzünden veya eviction ile silinmiş.               |
+2. AMD Opteron (MOESI) State Table
+| State             | Anlam                                                                                              |
+| ----------------- | -------------------------------------------------------------------------------------------------- |
+| **M — Modified**  | Veri sadece bu çekirdekte, RAM’den farklı; write-back gerektirir.                                  |
+| **O — Owned**     | Bu çekirdekte "dirty shared" kopya vardır; diğer çekirdeklere veri dağıtımını *bu çekirdek* yapar. |
+| **E — Exclusive** | Tek çekirdekte, temiz kopya, serbestçe yazılabilir.                                                |
+| **S — Shared**    | Temiz paylaşılmış kopya.                                                                           |
+| **I — Invalid**   | Geçersiz cache line.                                                                               |
+3. Intel i7 MESIF State Table
+| State             | Anlam                                                                                                       |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| **M — Modified**  | Çekirdek verinin sahibi ve tek geçerli yazılmış kopyadır.                                                   |
+| **E — Exclusive** | Temiz ve sadece bu çekirdekte; ilk yazma ile M’e geçer.                                                     |
+| **S — Shared**    | Temiz, birden fazla çekirdekte olabilir.                                                                    |
+| **I — Invalid**   | Geçersiz cache line.                                                                                        |
+| **F — Forward**   | Shared kopyalar arasında **tek bir çekirdek** “resmi kaynak” olur → diğerlerine veri iletimini hızlandırır. |
 
 False Sharing – MESI State Ping-Pong Senaryosu
 ----------------------------------------------
