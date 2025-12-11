@@ -1,15 +1,16 @@
 **Cache line** : [ msb ... ][ cache line ID ][ offset bits (6 bits)]
 
 📌 Layout: normal structure
-index	address	line_id	offset_in_line
-0	0x55ec0ab62300	157b02ad88c	0
-1	0x55ec0ab62308	157b02ad88c	8
-2	0x55ec0ab62310	157b02ad88c	10
-3	0x55ec0ab62318	157b02ad88c	18
-4	0x55ec0ab62320	157b02ad88c	20
-5	0x55ec0ab62328	157b02ad88c	28
-6	0x55ec0ab62330	157b02ad88c	30
-7	0x55ec0ab62338	157b02ad88c	38
+| index | address        | line_id     | offset_in_line |
+| ----: | -------------- | ----------- | -------------- |
+|     0 | 0x55ec0ab62300 | 157b02ad88c | 0              |
+|     1 | 0x55ec0ab62308 | 157b02ad88c | 8              |
+|     2 | 0x55ec0ab62310 | 157b02ad88c | 16             |
+|     3 | 0x55ec0ab62318 | 157b02ad88c | 24             |
+|     4 | 0x55ec0ab62320 | 157b02ad88c | 32             |
+|     5 | 0x55ec0ab62328 | 157b02ad88c | 40             |
+|     6 | 0x55ec0ab62330 | 157b02ad88c | 48             |
+|     7 | 0x55ec0ab62338 | 157b02ad88c | 56             |
 
 Süre: 5.38799
 
